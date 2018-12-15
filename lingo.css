@@ -134,8 +134,8 @@
 			}
 
 	#modal {
+		grid-area: 1/1;
 		display: none;
-		position: fixed;
 		width: 800px;
 		height: 500px;
 		text-align: center;
@@ -174,8 +174,8 @@
 			}
 
 	#usernameInput {
+		grid-area: 1/2/2/5;
 		position: relative;
-		left: 37%;
 		font-size: 20px;
 		transition: .3s;
 		margin: 20px auto;
@@ -191,11 +191,11 @@
 	}
 
 	#usernameCreate {
+		grid-area: 1/2/2/5;
 		position: relative;
-		left: 50%;
 		height: 35px;
 		width: 150px;
-		margin: 30px auto;
+		margin: 30px auto 0px 400px;
 		background-color: rgb(0,0,225);
 		border-style: solid;
 		border-radius: 20px 10px 20px 10px;

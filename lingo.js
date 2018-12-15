@@ -262,10 +262,10 @@ var attributesArray=[
 		setInterval(
 
 			function() {
-				timerHeight=timerHeight-0.10;
+				timerHeight=timerHeight-3.10;
 				timerBalk.style.height=timerHeight+'%';
 
-				if (timerHeight<33) {
+				if (timerHeight<25) {
 					timerBalk.style.backgroundColor="rgb(200,0,0)";
 				}
 
