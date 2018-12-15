@@ -1,0 +1,380 @@
+
+
+
+/*FONTS*/
+
+	@font-face {
+		font-family: Bungee;
+		src: url("fonts/Bungee-Regular.ttf");
+	}
+
+	@font-face {
+		font-family: Archivo;
+		src: url("fonts/Archivo-Bold.ttf");
+	}
+
+/*FONTS*/
+
+
+
+/*CLASSES*/
+
+	.hide {
+		display: none;
+	}
+
+	.block {
+		display: block;
+	}
+
+	.usernameInputHide {
+		bottom: 20%;
+		opacity: 0;
+	}
+
+	.usernameInputShow {
+		bottom: 0%;
+		opacity: 1;
+	}
+
+	.bungee {
+		font-family: Bungee;
+	}
+
+	.archivo {
+		font-family: Archivo;
+	}
+
+/*CLASSES*/
+
+
+
+/*START*/
+
+	body {
+		margin: 0px;
+		background-color: grey;
+	}
+
+	button {
+		font-family: Bungee;
+	}
+
+	#lingo-container {
+		border-style: solid;
+		border-width: 20px;
+		border-color: rgb(0,0,100);
+		border-radius: 80px 10px 80px 10px;
+		display: grid;
+		grid-template-columns: repeat(5, 20%);
+		grid-template-rows: repeat(5, 25%);
+		background-color: rgb(0,0,150);
+		width: 800px;
+		height: 500px;
+		margin: 0px auto;
+	}
+
+	#startBtn {
+		grid-area: 2/2/3/5;
+		margin: auto auto;
+		outline: none;
+		height: 75px;
+		width: 250px;
+		font-size: 20px;
+		background-color: rgb(0,0,225);
+		border-color: rgb(0,0,100);
+		border-style: solid;
+		border-width: 5px;
+		border-radius: 40px 0px 40px 0px;
+		transition: .3s;
+	}
+
+			#startBtn:hover {
+				width: 300px;
+				background-color: white;
+				cursor: pointer;
+			}
+
+	#uitlegBtn {
+		grid-area: 3/2/4/5;
+		margin: 0px auto;
+		width: 200px;
+		height: 50px;
+		outline: none;
+		border-radius: 40px 10px 0px 0px;
+		transition: .3s;
+		border-width: 0px;
+		background-color: rgb(0,0,225);
+	}
+
+			#uitlegBtn:hover {
+				width: 250px;
+				background-color: white;
+				cursor: pointer;
+				border-radius: 40px;
+			}
+
+	#usernameBtn {
+		grid-area: 3/2/4/5;
+		margin: 50px auto 0px auto;
+		width: 200px;
+		height: 50px;
+		outline: none;
+		border-radius: 0px 0px 40px 10px;
+		transition: .3s;
+		border-width: 0px;
+		background-color: rgb(0,0,225);
+	}
+
+			#usernameBtn:hover {
+				width: 250px;
+				background-color: white;
+				cursor: pointer;
+				border-radius: 40px;
+			}
+
+	#modal {
+		display: none;
+		position: fixed;
+		width: 800px;
+		height: 500px;
+		text-align: center;
+		background-color: rgba(0,0,0,0.5);
+		border-radius: 60px 0px 60px 0px;
+		z-index: 1;
+	}
+
+	#modalText {
+		margin: 100px auto 0px auto;
+		width: 300px;
+		background-color: white;
+		border-radius: 40px 10px 40px 10px;
+		color: black;
+		padding: 20px;
+		font-size: 17px;
+	}
+
+	#backB {
+		margin: 30px auto;
+		width: 200px;
+		font-size: 20px;
+		height: 50px;
+		outline: none;
+		border-radius: 40px 10px 40px 10px;
+		transition: .3s;
+		border-width: 0px;
+		background-color: rgb(0,0,225);
+	}
+
+			#backB:hover {
+				background-color: white;
+				width: 250px;
+				border-radius: 40px;
+				cursor: pointer;
+			}
+
+	#usernameInput {
+		position: relative;
+		left: 37%;
+		font-size: 20px;
+		transition: .3s;
+		margin: 20px auto;
+		padding: 10px;
+		height: 30px;
+		width: 200px;
+		outline: none;
+		text-align: center;
+		border-style: solid;
+		border-width: 5px;
+		border-radius: 40px 10px 40px 10px;
+		border-color: rgb(0,0,100);
+	}
+
+	#usernameCreate {
+		position: relative;
+		left: 50%;
+		height: 35px;
+		width: 150px;
+		margin: 30px auto;
+		background-color: rgb(0,0,225);
+		border-style: solid;
+		border-radius: 20px 10px 20px 10px;
+		border-width: 3px;
+		border-color: rgb(0,0,150);
+		outline: none;
+		font-size: 10px;
+		transition: .3s;
+	}
+
+	#usernameCreate:hover {
+		background-color: white;
+		cursor: pointer;
+	}
+
+	#usernameCreate:active {
+		transition: 0s;
+		border-color: rgb(0,0,250);
+	}
+
+	#usernameStartDis {
+		grid-area: 1/2/2/5;
+		text-align: center;
+		height: 50px;
+		background-color: rgb(0,0,225);
+		margin: 10px auto 0px auto;
+		padding: 10px 20px 5px 20px;
+		border-style: solid;
+		border-width: 5px;
+		border-radius: 40px 20px 40px 20px;
+		border-color: rgb(0,0,150);
+	}
+
+/*START*/
+
+
+
+/*CHOOSE TIME*/
+
+	#chooseTime {
+		grid-area: 1/2/2/5;
+		margin: 20px auto;
+		width: 250px;
+		height: 125px;
+		padding: 20px;
+		border-style: solid;
+		border-radius: 40px 10px 40px 10px;
+		border-width: 5px;
+		border-color: rgb(0,0,100);
+		background-color: rgb(0,0,250);
+		text-align: center;
+	}
+
+	#option30s, #option60s, #option90s {
+		margin: 0px auto;
+		width: 75px;
+		height: 75px;
+		border-style: solid;
+		border-width: 5px;
+		border-radius: 20px 10px 20px 10px;
+		outline: none;
+		font-size: 25px;
+		background-color: rgb(0,0,250);
+		border-color: rgb(0,0,150);
+		transition: .3s;
+	}
+
+	#option30s:hover, #option60s:hover, #option90s:hover {
+		background-color: white;
+		cursor: pointer;
+	}
+
+	#option30s {
+		grid-area: 3/2;
+	}
+
+	#option60s {
+		grid-area: 3/3;
+	}
+
+	#option90s {
+		grid-area: 3/4;
+	}
+
+/*CHOOSE TIME*/
+
+
+
+/*LINGO*/
+
+	#timer {
+		grid-area: 1/1/5/2;
+		width: 25px;
+		height: 350px;
+		border-radius: 20px 7px 20px 7px;
+		border-style: solid;
+		border-width: 5px;
+		border-color: rgb(0,0,100);
+		background-color: rgb(0,0,100);
+		margin: 70px auto 0px 50px;
+	}
+
+	#timerBalk {
+		width: 100%;
+		height: 100%;
+		background-color: rgb(0,200,0);
+		border-radius: 15px 5px 15px 5px
+	}
+
+	#secondsLeft {
+		grid-area: 1/1/5/2;
+		color: rgb(0,200,0);
+		font-size: 20px;
+		height: 30px;
+		width: 30px;
+		margin: 30px auto 10px 60px;
+		font-family: Archivo;
+	}
+
+	#lingoBox {
+		grid-area: 1/2/4/5;
+		background-color: rgb(0,0,250);
+		border-radius: 40px 10px 40px 10px;
+		margin: 70px auto;
+		padding: 20px;
+		width: 300px;
+		height: 360px;
+	}
+
+	#lingoBox div {
+		display: inline-block;
+		width: 50px;
+		height: 50px;
+		background-color: rgb(0,0,150);
+		border-radius: 15px 5px;
+		margin: 5px;
+	}
+
+	#startTimerBtn {
+		grid-area: 1/2/2/5;
+		width: 200px;
+		height: 50px;
+		background-color: rgb(0,0,250);
+		border-style: solid;
+		border-width: 5px;
+		border-color: rgb(0,0,100);
+		margin: 10px auto;
+		outline: none;
+		border-radius: 40px 10px 40px 10px;
+		transition: .3s
+	}
+
+	#startTimerBtn:hover {
+		border-radius: 40px;
+		background-color: white;
+		width: 250px;
+		cursor: pointer;
+	}
+
+	#shield {
+		grid-area: 1/2/4/5;
+		background-color: rgba(0,0,0,0.5);
+		width: 300px;
+		height: 360px;
+		margin: 70px auto;
+		padding: 20px;
+		z-index: 1;
+		border-radius: 40px 10px 40px 10px;
+		text-align: center;
+		font-size: 30px;
+		color: white;
+	}
+
+	#usernameP {
+		grid-area: 1/5;
+		font-size: 15px;
+		height: 20px;
+		width: 100px;
+		margin: 5px 5px 5px 55px;
+	}
+
+/*LINGO*/
