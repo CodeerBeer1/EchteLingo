@@ -107,15 +107,15 @@ var attributesArray=[
 
 	option30s.setAttribute("id", "option30s");
 	option30s.setAttribute("class", "hide");
-	option30s.setAttribute("onclick", "sendTime(option30sText, startLingo(30))");
+	option30s.setAttribute("onclick", "sendTime(option30sText, startLingo())");
 
 	option60s.setAttribute("id", "option60s");
 	option60s.setAttribute("class", "hide");
-	option60s.setAttribute("onclick", "sendTime(option60sText, startLingo(60))");
+	option60s.setAttribute("onclick", "sendTime(option60sText, startLingo())");
 
 	option90s.setAttribute("id", "option90s");
 	option90s.setAttribute("class", "hide");
-	option90s.setAttribute("onclick", "sendTime(option90sText, startLingo(90))");
+	option90s.setAttribute("onclick", "sendTime(option90sText, startLingo())");
 
 	timer.setAttribute("id", "timer");
 	timer.setAttribute("class", "hide");
@@ -219,7 +219,6 @@ var attributesArray=[
 			uitlegBtn.style.borderRadius="40px 10px 40px 10px";
 
 		}
-		
 
 	}
 
@@ -262,7 +261,7 @@ var attributesArray=[
 		setInterval(
 
 			function() {
-				timerHeight=timerHeight-3.10;
+				timerHeight=timerHeight-0.10;
 				timerBalk.style.height=timerHeight+'%';
 
 				if (timerHeight<25) {
