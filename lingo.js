@@ -28,8 +28,8 @@ var attributesArray=[
 	var uitlegBtn=document.getElementById("uitlegBtn");
 	var usernameBtn=document.getElementById("usernameBtn");
 
-	var modal=document.createElement("div");
-	var modalText=document.createElement("p");
+	var oneBtnModal=document.createElement("div");
+	var oneBtnModalText=document.createElement("p");
 	var backB=document.createElement("button");
 	var usernameInput=document.createElement("input");
 	var usernameCreate=document.createElement("button");
@@ -48,7 +48,7 @@ var attributesArray=[
 	var quitBtn=document.createElement("button");
 	var twoBtnModal=document.createElement("div");
 	var twoBtnModalText=document.createElement("p");
-	var quitBtnDiv=document.createElement("div");
+	var twoBtnDiv=document.createElement("div");
 	var btnOne=document.createElement("button");
 	var btnTwo=document.createElement("button");
 
@@ -92,14 +92,14 @@ var attributesArray=[
 
 //ATTRIBUTES
 
-	modal.setAttribute("id", "modal");
-	modal.setAttribute("class", "hide");
+	oneBtnModal.setAttribute("id", "oneBtnModal");
+	oneBtnModal.setAttribute("class", "hide");
 
 	backB.setAttribute("id", "backB");
 	backB.setAttribute("class", "block");
-	backB.setAttribute("onclick", "modalStyle('hide')");
+	backB.setAttribute("onclick", "oneBtnModalStyle('hide')");
 
-	modalText.setAttribute("id", "modalText");
+	oneBtnModalText.setAttribute("id", "oneBtnModalText");
 
 	usernameInput.setAttribute("id", "usernameInput");
 	usernameInput.setAttribute("class", "usernameInputHide");
@@ -158,7 +158,7 @@ var attributesArray=[
 
 	twoBtnModalText.setAttribute("id", "twoBtnModalText");
 
-	quitBtnDiv.setAttribute("id", "quitBtnDiv");
+	twoBtnDiv.setAttribute("id", "twoBtnDiv");
 
 	btnOne.setAttribute("id", "btnOne");
 	btnOne.setAttribute("onclick", "twoBtnModalStyle('hide')");
@@ -172,7 +172,7 @@ var attributesArray=[
 
 //APPENDING
 
-	lingoContainer.appendChild(modal);
+	lingoContainer.appendChild(oneBtnModal);
 	lingoContainer.appendChild(usernameInput);
 	lingoContainer.appendChild(usernameCreate);
 	lingoContainer.appendChild(usernameStartDis);
@@ -189,8 +189,8 @@ var attributesArray=[
 	lingoContainer.appendChild(quitBtn);
 	lingoContainer.appendChild(twoBtnModal);
 
-	modal.appendChild(modalText);
-	modal.appendChild(backB);
+	oneBtnModal.appendChild(oneBtnModalText);
+	oneBtnModal.appendChild(backB);
 	backB.appendChild(backText);
 	usernameCreate.appendChild(userCreatext);
 	chooseTime.appendChild(chooseTimeText);
@@ -198,9 +198,9 @@ var attributesArray=[
 	startTimerBtn.appendChild(startTimerBtnText);
 	quitBtn.appendChild(quitBtnText);
 	twoBtnModal.appendChild(twoBtnModalText);
-	quitBtnDiv.appendChild(btnOne);
-	twoBtnModal.appendChild(quitBtnDiv)
-	quitBtnDiv.appendChild(btnTwo);
+	twoBtnDiv.appendChild(btnOne);
+	twoBtnModal.appendChild(twoBtnDiv)
+	twoBtnDiv.appendChild(btnTwo);
 
 //APPENDING
 
@@ -208,10 +208,10 @@ var attributesArray=[
 
 //FUNCTIONS
 
-	function modalStyle(className, text, btnText) {
+	function oneBtnModalStyle(className, text, btnText) {
 		
-		modal.className=className;
-		modalText.innerHTML=text;
+		oneBtnModal.className=className;
+		oneBtnModalText.innerHTML=text;
 		backB.innerHTML=btnText;
 
 	}
@@ -247,7 +247,7 @@ var attributesArray=[
 
 		if (usernameInput.value=="Enter username"||usernameInput.value=="") {
 
-			modalStyle("block", naamFout.textContent, backText.textContent);
+			oneBtnModalStyle("block", naamFout.textContent, backText.textContent);
 
 		}
 
