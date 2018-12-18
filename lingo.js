@@ -151,7 +151,7 @@ var attributesArray=[
 
 	quitBtn.setAttribute("id", "quitBtn");
 	quitBtn.setAttribute("class", "hide");
-	quitBtn.setAttribute("onclick", "twoBtnModalStyle('block', quitext, quitCancel, quitConfirm)");
+	quitBtn.setAttribute("onclick", "twoBtnModalStyle('block', quitext, quitConfirm, quitCancel)");
 
 	twoBtnModal.setAttribute("id", "twoBtnModal");
 	twoBtnModal.setAttribute("class", "hide");
@@ -211,8 +211,8 @@ var attributesArray=[
 	function oneBtnModalStyle(className, text, btnText) {
 		
 		oneBtnModal.className=className;
-		oneBtnModalText.innerHTML=text;
-		backB.innerHTML=btnText;
+		oneBtnModalText.innerHTML=text.textContent;
+		backB.innerHTML=btnText.textContent;
 
 	}
 
@@ -220,8 +220,8 @@ var attributesArray=[
 
 		twoBtnModal.className=className;
 		twoBtnModalText.innerHTML=text.textContent;
-		btnOne.innerHTML=btnTwoText.textContent;
-		btnTwo.innerHTML=btnOneText.textContent;
+		btnOne.innerHTML=btnOneText.textContent;
+		btnTwo.innerHTML=btnTwoText.textContent;
 
 	}
 
