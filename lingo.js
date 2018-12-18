@@ -69,11 +69,12 @@ var attributesArray=[
 	var naamFout=document.createTextNode("Dit is niet een geldige username.")
 	var uitlegText=document.createTextNode("In Lingo krijg je 5 kansen om een woord te raden binnen een tijd. Als dat lukt heb je gewonnen, zoniet dan heb je verloren.");
 	var backText=document.createTextNode("Terug");
+	var okText=document.createTextNode("Oke");
 	var userCreatext=document.createTextNode("Maak aan");
 	var confirm=document.createTextNode("weet je zeker dat je wilt beginnnen?")
 	var chooseTimeText=document.createTextNode("Kies hoeveel tijd in seconden je wilt om een woord te raden.");
 	var startTimerBtnText=document.createTextNode("Start");
-	var gameOverText=document.createTextNode("Helaas, de tijd is om. Wil je opnieuw proberen?");
+	var gameOverText=document.createTextNode("Helaas, je tijd is om. Wil je opnieuw proberen?");
 	var timerUitlegText=document.createTextNode("Zodra je op de start knop drukt, gaat de timer af");
 	var usernamePText=document.createTextNode(usernameVar);
 	var quitBtnText=document.createTextNode("Stop");
@@ -315,10 +316,6 @@ var attributesArray=[
 				timerBalk.style.height=timerHeight+'%';
 				timerBalk.style.marginTop=timerMarginTop+'%';
 
-				if (timerHeight<25) {
-					timerBalk.style.backgroundColor="rgb(200,0,0)";
-				}
-
 				if (timerHeight<0) {
 					timerBalk.className="hide";
 					twoBtnModalStyle("block", gameOverText, quitCancel, quitConfirm);
@@ -328,13 +325,19 @@ var attributesArray=[
 			}
 		,
 			timeSeconds)
-		timeSeconds-=1;
 
+		timeSeconds-=1;
 		var countdownInterval=setInterval(
 
 			function() {
 
 				secondsLeft.innerHTML=timeSeconds--+':';
+
+				if (timeSeconds<10) {
+					timerBalk.style.backgroundColor='rgb(200,0,0)';
+					secondsLeft.style.color='rgb(200,0,0)';
+				}
+
 				if (timeSeconds<0) {
 					clearInterval(countdownInterval);
 				}
