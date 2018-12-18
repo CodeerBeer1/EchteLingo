@@ -15,6 +15,7 @@ var attributesArray=[
 	var usernameVar
 	var timeSeconds
 	var timerHeight=100;
+	var timerMarginTop=0;
 
 //VARS
 
@@ -44,6 +45,12 @@ var attributesArray=[
 	var startTimerBtn=document.createElement("button");
 	var shield=document.createElement("div");
 	var usernameP=document.createElement("p");
+	var quitBtn=document.createElement("button");
+	var twoBtnModal=document.createElement("div");
+	var twoBtnModalText=document.createElement("p");
+	var quitBtnDiv=document.createElement("div");
+	var btnOne=document.createElement("button");
+	var btnTwo=document.createElement("button");
 
 	for (a=1;a<6;a++) {
 		for (i=1;i<6;i++) {
@@ -66,9 +73,13 @@ var attributesArray=[
 	var confirm=document.createTextNode("weet je zeker dat je wilt beginnnen?")
 	var chooseTimeText=document.createTextNode("Kies hoeveel tijd in seconden je wilt om een woord te raden.");
 	var startTimerBtnText=document.createTextNode("Start");
-	var gameOverText=document.createTextNode("Helaas, de tijd is om. Probeer opnieuw!");
+	var gameOverText=document.createTextNode("Helaas, de tijd is om. Wil je opnieuw proberen?");
 	var timerUitlegText=document.createTextNode("Zodra je op de start knop drukt, gaat de timer af");
 	var usernamePText=document.createTextNode(usernameVar);
+	var quitBtnText=document.createTextNode("Stop");
+	var quitext=document.createTextNode("Weet je zeker dat je wilt stoppen?");
+	var quitConfirm=document.createTextNode("Ja");
+	var quitCancel=document.createTextNode("Nee");
 
 	var option30sText=30;
 	var	option60sText=60;
@@ -81,14 +92,13 @@ var attributesArray=[
 //ATTRIBUTES
 
 	modal.setAttribute("id", "modal");
-	modal.setAttribute("class", "block");
+	modal.setAttribute("class", "hide");
 
 	backB.setAttribute("id", "backB");
 	backB.setAttribute("class", "block");
-	backB.setAttribute("onclick", "modalStyle('none')");
+	backB.setAttribute("onclick", "modalStyle('hide')");
 
 	modalText.setAttribute("id", "modalText");
-	modalText.setAttribute("class", "block");
 
 	usernameInput.setAttribute("id", "usernameInput");
 	usernameInput.setAttribute("class", "usernameInputHide");
@@ -107,15 +117,15 @@ var attributesArray=[
 
 	option30s.setAttribute("id", "option30s");
 	option30s.setAttribute("class", "hide");
-	option30s.setAttribute("onclick", "sendTime(option30sText, startLingo())");
+	option30s.setAttribute("onclick", "sendTime(option30sText)");
 
 	option60s.setAttribute("id", "option60s");
 	option60s.setAttribute("class", "hide");
-	option60s.setAttribute("onclick", "sendTime(option60sText, startLingo())");
+	option60s.setAttribute("onclick", "sendTime(option60sText)");
 
 	option90s.setAttribute("id", "option90s");
 	option90s.setAttribute("class", "hide");
-	option90s.setAttribute("onclick", "sendTime(option90sText, startLingo())");
+	option90s.setAttribute("onclick", "sendTime(option90sText)");
 
 	timer.setAttribute("id", "timer");
 	timer.setAttribute("class", "hide");
@@ -138,6 +148,23 @@ var attributesArray=[
 	usernameP.setAttribute("id", "usernameP");
 	usernameP.setAttribute("class", "hide");
 
+	quitBtn.setAttribute("id", "quitBtn");
+	quitBtn.setAttribute("class", "hide");
+	quitBtn.setAttribute("onclick", "twoBtnModalStyle('block', quitext, quitCancel, quitConfirm)");
+
+	twoBtnModal.setAttribute("id", "twoBtnModal");
+	twoBtnModal.setAttribute("class", "hide");
+
+	twoBtnModalText.setAttribute("id", "twoBtnModalText");
+
+	quitBtnDiv.setAttribute("id", "quitBtnDiv");
+
+	btnOne.setAttribute("id", "btnOne");
+	btnOne.setAttribute("onclick", "twoBtnModalStyle('hide')");
+
+	btnTwo.setAttribute("id", "btnTwo");
+	btnTwo.setAttribute("onclick", "twoBtnModalStyle('hide')");
+
 //ATTRIBUTES
 
 
@@ -158,13 +185,21 @@ var attributesArray=[
 	lingoContainer.appendChild(startTimerBtn);
 	lingoContainer.appendChild(shield);
 	lingoContainer.appendChild(usernameP);
+	lingoContainer.appendChild(quitBtn);
+	lingoContainer.appendChild(twoBtnModal);
 
 	modal.appendChild(modalText);
+	modal.appendChild(backB);
 	backB.appendChild(backText);
 	usernameCreate.appendChild(userCreatext);
 	chooseTime.appendChild(chooseTimeText);
 	timer.appendChild(timerBalk);
 	startTimerBtn.appendChild(startTimerBtnText);
+	quitBtn.appendChild(quitBtnText);
+	twoBtnModal.appendChild(twoBtnModalText);
+	quitBtnDiv.appendChild(btnOne);
+	twoBtnModal.appendChild(quitBtnDiv)
+	quitBtnDiv.appendChild(btnTwo);
 
 //APPENDING
 
@@ -172,11 +207,20 @@ var attributesArray=[
 
 //FUNCTIONS
 
-	function modalStyle(display, text) {
+	function modalStyle(className, text, btnText) {
 		
-		modal.style.display=display;
+		modal.className=className;
 		modalText.innerHTML=text;
-		modal.appendChild(backB);
+		backB.innerHTML=btnText;
+
+	}
+
+	function twoBtnModalStyle(className, text, btnOneText, btnTwoText) {
+
+		twoBtnModal.className=className;
+		twoBtnModalText.innerHTML=text.textContent;
+		btnOne.innerHTML=btnTwoText.textContent;
+		btnTwo.innerHTML=btnOneText.textContent;
 
 	}
 
@@ -202,7 +246,7 @@ var attributesArray=[
 
 		if (usernameInput.value=="Enter username"||usernameInput.value=="") {
 
-			modalStyle("block", naamFout.textContent);
+			modalStyle("block", naamFout.textContent, backText.textContent);
 
 		}
 
@@ -235,6 +279,11 @@ var attributesArray=[
 	}
 
 	function chooseTimeFun() {
+
+		if (usernameInput.value=="Enter username"||usernameInput.value=="") {
+			usernameP.style.color="black";
+			usernameVar="Gast";
+		}
 		
 		chooseTime.className="block";
 		option30s.className="block";
@@ -247,40 +296,58 @@ var attributesArray=[
 
 	}
 
-	function sendTime(time, functionName) {
+	function sendTime(time) {
 
 		timeSeconds=time;
-		functionName
+		startLingo();
 	}
 
 	function startTimer() {
 
 		shield.className="hide";
 		startTimerBtn.className="hide";
-
-		setInterval(
+		var balkInterval=setInterval(
 
 			function() {
-				timerHeight=timerHeight-0.10;
+				timerHeight=timerHeight-0.1;
+				timerMarginTop=timerMarginTop+1.4;
+
 				timerBalk.style.height=timerHeight+'%';
+				timerBalk.style.marginTop=timerMarginTop+'%';
 
 				if (timerHeight<25) {
 					timerBalk.style.backgroundColor="rgb(200,0,0)";
 				}
 
 				if (timerHeight<0) {
-					clearInterval();
 					timerBalk.className="hide";
-					modalStyle("block", gameOverText.textContent);
+					twoBtnModalStyle("block", gameOverText, quitCancel, quitConfirm);
+					clearInterval(balkInterval);
 				}
+
 			}
 		,
 			timeSeconds)
+		timeSeconds-=1;
+
+		var countdownInterval=setInterval(
+
+			function() {
+
+				secondsLeft.innerHTML=timeSeconds--+':';
+				if (timeSeconds<0) {
+					clearInterval(countdownInterval);
+				}
+
+
+			}
+		,
+				1000)
 
 	}
 
 	function startLingo() {
-
+		
 		console.log(timeSeconds+" second game started");
 		
 		chooseTime.className="hide";
@@ -292,12 +359,13 @@ var attributesArray=[
 		secondsLeft.className="block";
 		lingoBox.className="block";
 		startTimerBtn.className="block";
+		quitBtn.className="block";
 		shield.className="block";
 		usernameP.className="block";
 
 		shield.innerHTML=timerUitlegText.textContent;
-		secondsLeft.innerHTML=timeSeconds;
-		usernameP.innerHTML=usernamePText.textContent;
+		secondsLeft.innerHTML=timeSeconds+':';
+		usernameP.innerHTML=usernameVar;
 
 	}
 

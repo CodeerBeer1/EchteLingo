@@ -135,7 +135,6 @@
 
 	#modal {
 		grid-area: 1/1;
-		display: none;
 		width: 800px;
 		height: 500px;
 		text-align: center;
@@ -162,13 +161,12 @@
 		outline: none;
 		border-radius: 40px 10px 40px 10px;
 		transition: .3s;
-		border-width: 0px;
 		background-color: rgb(0,0,225);
+		border-width: 0px;
 	}
 
 			#backB:hover {
 				background-color: white;
-				width: 250px;
 				border-radius: 40px;
 				cursor: pointer;
 			}
@@ -345,7 +343,7 @@
 		margin: 10px auto;
 		outline: none;
 		border-radius: 40px 10px 40px 10px;
-		transition: .3s
+		transition: .3s;
 	}
 
 	#startTimerBtn:hover {
@@ -371,10 +369,93 @@
 
 	#usernameP {
 		grid-area: 1/5;
-		font-size: 15px;
+		font-size: 20px;
+		text-align: right;
 		height: 20px;
-		width: 100px;
-		margin: 5px 5px 5px 55px;
+		margin: 10px;
+		line-height: 20px;
+		color: white;
 	}
+
+	#quitBtn {
+		grid-area: 4/5;
+		width: 100px;
+		height: 50px;
+		background-color: rgb(0,0,250);
+		border-style: solid;
+		border-width: 5px;
+		border-color: rgb(0,0,100);
+		margin: 10px auto;
+		outline: none;
+		border-radius: 40px;
+		transition: .3s;
+	}
+
+			#quitBtn:hover {
+				width: 125px;
+				background-color: white;
+				cursor: pointer;
+			}
+
+	#twoBtnModal {
+		grid-area: 1/1;
+		z-index: 2;
+		width: 800px;
+		height: 500px;
+		background-color: rgba(0,0,0,0.5);
+		border-radius: 60px 0px 60px 0px;
+	}
+
+	#twoBtnModalText {
+		margin: 100px auto 0px auto;
+		width: 300px;
+		padding: 20px;
+		font-size: 17px;
+		border-radius: 40px 10px 40px 10px;
+		background-color: white;
+		text-align: center;
+	}
+
+	#quitBtnDiv {
+		margin: 30px auto;
+		width: 500px;
+		height: 50px;
+	}
+
+	#btnOne {
+		float: right;
+		width: 200px;
+		height: 50px;
+		margin: 0px;
+		outline: none;
+		background-color: rgb(0,0,225);
+		border-radius: 40px 10px;
+		border-width: 0px;
+		transition: .3s;
+	}
+
+			#btnOne:hover {
+				background-color: white;
+				cursor: pointer;
+				border-radius: 40px;
+			}
+
+	#btnTwo {
+		width: 200px;
+		height: 50px;
+		margin: 0px;
+		outline: none;
+		background-color: rgb(0,0,225);
+		border-radius: 40px 10px;
+		border-width: 0px;
+		transition: .3s;
+		float: left;
+	}
+
+			#btnTwo:hover {
+				background-color: white;
+				cursor: pointer;
+				border-radius: 40px;
+			}
 
 /*LINGO*/
