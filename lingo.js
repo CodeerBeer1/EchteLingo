@@ -16,6 +16,8 @@ var attributesArray=[
 	var timeSeconds
 	var timerHeight=100;
 	var timerMarginTop=0;
+	//var randomWord=words[Math.floor(Math.random()*words.length)];
+	var focusVar=1;
 
 //VARS
 
@@ -54,8 +56,9 @@ var attributesArray=[
 
 	for (a=1;a<6;a++) {
 		for (i=1;i<6;i++) {
-			var letter=document.createElement("div");
+			var letter=document.createElement("input");
 			letter.setAttribute("id", a+"letter"+i);
+			letter.setAttribute("onkeydown", "nextLetter()")
 			lingoBox.appendChild(letter);
 		}
 	}
@@ -199,7 +202,7 @@ var attributesArray=[
 	quitBtn.appendChild(quitBtnText);
 	twoBtnModal.appendChild(twoBtnModalText);
 	twoBtnDiv.appendChild(btnOne);
-	twoBtnModal.appendChild(twoBtnDiv)
+	twoBtnModal.appendChild(twoBtnDiv);
 	twoBtnDiv.appendChild(btnTwo);
 
 //APPENDING
@@ -207,6 +210,20 @@ var attributesArray=[
 
 
 //FUNCTIONS
+
+	function reset() {
+
+		document.getElementsByClassName("block").className="hide";
+		startLingo();
+
+	}
+
+	function nextLetter() {
+
+		document.getElementById("1letter"+focusVar).focus();
+		focusVar++;
+
+	}
 
 	function oneBtnModalStyle(className, text, btnText) {
 		
@@ -247,7 +264,7 @@ var attributesArray=[
 
 		if (usernameInput.value=="Enter username"||usernameInput.value=="") {
 
-			oneBtnModalStyle("block", naamFout.textContent, backText.textContent);
+			oneBtnModalStyle("block", naamFout, backText);
 
 		}
 
@@ -307,6 +324,9 @@ var attributesArray=[
 
 		shield.className="hide";
 		startTimerBtn.className="hide";
+
+		document.getElementById("1letter1").focus();
+
 		var balkInterval=setInterval(
 
 			function() {
@@ -357,6 +377,7 @@ var attributesArray=[
 		option30s.className="hide";
 		option60s.className="hide";
 		option90s.className="hide";
+		usernameInput.className="hide";
 
 		timer.className="block";
 		secondsLeft.className="block";

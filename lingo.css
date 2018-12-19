@@ -412,13 +412,19 @@
 		margin: 70px auto;
 		padding: 20px;
 		width: 300px;
-		height: 360px;
+		height: 315px;
 	}
 
-	#lingoBox div {
+	#lingoBox input {
 		display: inline-block;
 		width: 50px;
+		text-align: center;
 		height: 50px;
+		text-shadow: 0 0 0 white;
+		border: none;
+		font-size: 30px;
+		color: transparent;
+		outline: none;
 		background-color: rgb(0,0,150);
 		border-radius: 15px 5px;
 		margin: 5px;
@@ -428,7 +434,7 @@
 		grid-area: 1/2/4/5;
 		background-color: rgba(0,0,0,0.5);
 		width: 300px;
-		height: 360px;
+		height: 315px;
 		margin: 70px auto;
 		padding: 20px;
 		z-index: 1;
