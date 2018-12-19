@@ -58,7 +58,8 @@ var attributesArray=[
 		for (i=1;i<6;i++) {
 			var letter=document.createElement("input");
 			letter.setAttribute("id", a+"letter"+i);
-			letter.setAttribute("onkeydown", "nextLetter()")
+			letter.setAttribute("maxlength", "1");
+			letter.setAttribute
 			lingoBox.appendChild(letter);
 		}
 	}
@@ -218,10 +219,27 @@ var attributesArray=[
 
 	}
 
-	function nextLetter() {
+	function nextLetter(evt) {
 
-		document.getElementById("1letter"+focusVar).focus();
-		focusVar++;
+		if (focusVar>5) {
+		 	focusVar--
+		}
+
+		if (focusVar==0) {
+			focusVar++;
+		}
+
+		if (evt.keyCode=="8") {
+		 	document.getElementById("1letter"+focusVar).focus();
+		 	focusVar--;
+		 	console.log(focusVar);
+		}
+
+		else {
+		 	document.getElementById("1letter"+focusVar).focus();
+			 focusVar++;
+			 console.log(focusVar);
+		}
 
 	}
 
@@ -326,6 +344,7 @@ var attributesArray=[
 		startTimerBtn.className="hide";
 
 		document.getElementById("1letter1").focus();
+		window.addEventListener("keydown", nextLetter, false);
 
 		var balkInterval=setInterval(
 
