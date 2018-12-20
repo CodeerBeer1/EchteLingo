@@ -10,16 +10,19 @@ var attributesArray=[
 
 
 
-//VARS
+//IMPORTANT VARS
 
 	var usernameVar
 	var timeSeconds
 	var timerHeight=100;
 	var timerMarginTop=0;
-	//var randomWord=words[Math.floor(Math.random()*words.length)];
-	var focusVar=1;
+	var randomWord=words[Math.floor(Math.random()*words.length)];
+	var randomSplit=randomWord.split('');
+	var focusVar=2;
+	var row=1;
+	var randomSplitIndex=0;
 
-//VARS
+//IMPORTANT VARS
 
 
 
@@ -78,13 +81,13 @@ var attributesArray=[
 	var confirm=document.createTextNode("weet je zeker dat je wilt beginnnen?")
 	var chooseTimeText=document.createTextNode("Kies hoeveel tijd in seconden je wilt om een woord te raden.");
 	var startTimerBtnText=document.createTextNode("Start");
-	var gameOverText=document.createTextNode("Helaas, je tijd is om. Wil je opnieuw proberen?");
+	var gameOverText=document.createTextNode("Helaas, je tijd is om. Het woord was "+randomWord+". Wil je opnieuw proberen?");
 	var timerUitlegText=document.createTextNode("Zodra je op de start knop drukt, gaat de timer af");
-	var usernamePText=document.createTextNode(usernameVar);
 	var quitBtnText=document.createTextNode("Stop");
 	var quitext=document.createTextNode("Weet je zeker dat je wilt stoppen?");
 	var quitConfirm=document.createTextNode("Ja");
 	var quitCancel=document.createTextNode("Nee");
+	var loseText=document.createTextNode("Je hebt geen kansen meer. Het woord was "+randomWord+". Probeer nog eens!");
 
 	var option30sText=30;
 	var	option60sText=60;
@@ -155,7 +158,7 @@ var attributesArray=[
 
 	quitBtn.setAttribute("id", "quitBtn");
 	quitBtn.setAttribute("class", "hide");
-	quitBtn.setAttribute("onclick", "twoBtnModalStyle('block', quitext, quitConfirm, quitCancel)");
+	quitBtn.setAttribute("onclick", "twoBtnModalStyle('block', quitext.textContent, quitConfirm.textContent, quitCancel.textContent)");
 
 	twoBtnModal.setAttribute("id", "twoBtnModal");
 	twoBtnModal.setAttribute("class", "hide");
@@ -219,44 +222,84 @@ var attributesArray=[
 
 	}
 
-	function nextLetter(evt) {
+	function locateLetter(evt) {
+
+		console.log('row'+row);
+		console.log('letter'+focusVar)
 
 		if (focusVar>5) {
-		 	focusVar--
+		 	focusVar--;
 		}
 
-		if (focusVar==0) {
+		else if (focusVar<1) {
 			focusVar++;
 		}
 
-		if (evt.keyCode=="8") {
-		 	document.getElementById("1letter"+focusVar).focus();
-		 	focusVar--;
-		 	console.log(focusVar);
+		else if (row==6) {
+			row--;
+			twoBtnModalStyle("block", loseText.textContent, quitConfirm.textContent, quitCancel.textContent);
 		}
 
-		else {
-		 	document.getElementById("1letter"+focusVar).focus();
-			 focusVar++;
-			 console.log(focusVar);
+		else if (evt.keyCode=="8") {
+			document.getElementById(row+"letter"+focusVar).focus();
+			focusVar--;
 		}
+
+		else if (evt.keyCode=="13") {
+			check();
+			row++;
+			focusVar=1;
+		}
+
+		else if (row!=6) {
+			document.getElementById(row+"letter"+focusVar).focus();
+			focusVar++;
+		}
+
+	}
+
+	function check() {
+
+		for (i=1;i<6;i++) {
+
+			var letter=document.getElementById(row+"letter"+i);
+
+			if (letter.value==randomSplit[randomSplitIndex]) {
+
+				letter.style.backgroundColor="rgb(0,255,0)";
+				letter.style.color="black";
+
+			}
+
+			if (letter.value!=randomSplit[randomSplitIndex]) {
+
+				letter.style.backgroundColor="rgb(200,0,0)";
+				letter.style.color="black";
+
+			}
+
+			randomSplitIndex++;
+
+		}
+
+		randomSplitIndex-=5;
 
 	}
 
 	function oneBtnModalStyle(className, text, btnText) {
 		
 		oneBtnModal.className=className;
-		oneBtnModalText.innerHTML=text.textContent;
-		backB.innerHTML=btnText.textContent;
+		oneBtnModalText.innerHTML=text;
+		backB.innerHTML=btnText;
 
 	}
 
 	function twoBtnModalStyle(className, text, btnOneText, btnTwoText) {
 
 		twoBtnModal.className=className;
-		twoBtnModalText.innerHTML=text.textContent;
-		btnOne.innerHTML=btnOneText.textContent;
-		btnTwo.innerHTML=btnTwoText.textContent;
+		twoBtnModalText.innerHTML=text;
+		btnOne.innerHTML=btnOneText;
+		btnTwo.innerHTML=btnTwoText;
 
 	}
 
@@ -282,7 +325,7 @@ var attributesArray=[
 
 		if (usernameInput.value=="Enter username"||usernameInput.value=="") {
 
-			oneBtnModalStyle("block", naamFout, backText);
+			oneBtnModalStyle("block", naamFout.textContent, backText.textContent);
 
 		}
 
@@ -343,8 +386,9 @@ var attributesArray=[
 		shield.className="hide";
 		startTimerBtn.className="hide";
 
-		document.getElementById("1letter1").focus();
-		window.addEventListener("keydown", nextLetter, false);
+		document.getElementById("1letter2").focus();
+		window.addEventListener("keydown", locateLetter, false);
+		document.getElementById("1letter1").value=randomSplit[0];
 
 		var balkInterval=setInterval(
 
@@ -354,13 +398,6 @@ var attributesArray=[
 
 				timerBalk.style.height=timerHeight+'%';
 				timerBalk.style.marginTop=timerMarginTop+'%';
-
-				if (timerHeight<0) {
-					timerBalk.className="hide";
-					twoBtnModalStyle("block", gameOverText, quitCancel, quitConfirm);
-					clearInterval(balkInterval);
-				}
-
 			}
 		,
 			timeSeconds)
@@ -379,6 +416,9 @@ var attributesArray=[
 
 				if (timeSeconds<0) {
 					clearInterval(countdownInterval);
+					timerBalk.className="hide";
+					twoBtnModalStyle("block", gameOverText.textContent, quitCancel.textContent, quitConfirm.textContent);
+					clearInterval(balkInterval);
 				}
 
 
