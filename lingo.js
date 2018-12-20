@@ -267,14 +267,14 @@ var attributesArray=[
 			if (letter.value==randomSplit[randomSplitIndex]) {
 
 				letter.style.backgroundColor="rgb(0,255,0)";
-				letter.style.color="black";
+				letter.style.textShadow="0 0 0 black";
 
 			}
 
 			if (letter.value!=randomSplit[randomSplitIndex]) {
 
 				letter.style.backgroundColor="rgb(200,0,0)";
-				letter.style.color="black";
+				letter.style.textShadow="0 0 0 black";
 
 			}
 
