@@ -21,6 +21,7 @@ var attributesArray=[
 	var focusVar=2;
 	var row=1;
 	var randomSplitIndex=0;
+	var timerPause=true;
 
 //IMPORTANT VARS
 
@@ -158,7 +159,7 @@ var attributesArray=[
 
 	quitBtn.setAttribute("id", "quitBtn");
 	quitBtn.setAttribute("class", "hide");
-	quitBtn.setAttribute("onclick", "twoBtnModalStyle('block', quitext.textContent, quitConfirm.textContent, quitCancel.textContent)");
+	quitBtn.setAttribute("onclick", "twoBtnModalStyle('block', quitext.textContent, quitCancel.textContent, quitConfirm.textContent)");
 
 	twoBtnModal.setAttribute("id", "twoBtnModal");
 	twoBtnModal.setAttribute("class", "hide");
@@ -171,7 +172,7 @@ var attributesArray=[
 	btnOne.setAttribute("onclick", "twoBtnModalStyle('hide')");
 
 	btnTwo.setAttribute("id", "btnTwo");
-	btnTwo.setAttribute("onclick", "twoBtnModalStyle('hide')");
+	btnTwo.setAttribute("onclick", "");
 
 //ATTRIBUTES
 
@@ -217,8 +218,35 @@ var attributesArray=[
 
 	function reset() {
 
-		document.getElementsByClassName("block").className="hide";
-		startLingo();
+		timerHeight=100;
+		timerMarginTop=0;
+		focusVar=2;
+		row=1;
+		timerPause=false
+		randomWord=words[Math.floor(Math.random()*words.length)];
+		randomSplit=randomWord.split("");
+
+		loseText=document.createTextNode("Je hebt geen kansen meer. Het woord was "+randomWord+". Probeer nog eens!");
+		gameOverText=document.createTextNode("Helaas, je tijd is om. Het woord was "+randomWord+". Wil je opnieuw proberen?")
+
+		twoBtnModalStyle("hide");
+		lingoBox.className="hide";
+		secondsLeft.className="hide";
+		usernameDisplay.className="hide";
+		timerBalk.style.backgroundColor="rgb(0,200,0)";
+		secondsLeft.style.color="rgb(0,200,0)";
+		usernameStartDis.className="hide";
+		quitBtn.className="hide";
+		shield.className="hide";
+		timer.className="hide";
+		startTimerBtn.className="hide";
+		secondsLeft.style.color="rgb(0,200,0)";
+		timerBalk.style.backgroundColor="rgb(0,200,0)";
+		timerBalk.style.marginTop="0%";
+		timerBalk.style.height="100%";
+
+		window.removeEventListener("keydown", locateLetter, false)
+		addStart();
 
 	}
 
@@ -228,16 +256,19 @@ var attributesArray=[
 		console.log('letter'+focusVar)
 
 		if (focusVar>5) {
-		 	focusVar--;
+		 	focusVar=5;
+		 	document.getElementById(row+"letter"+focusVar).focus();
 		}
 
 		else if (focusVar<1) {
 			focusVar++;
+			document.getElementById(row+"letter"+focusVar).focus();
 		}
 
 		else if (row==6) {
 			row--;
 			twoBtnModalStyle("block", loseText.textContent, quitConfirm.textContent, quitCancel.textContent);
+			timerPause=false;
 		}
 
 		else if (evt.keyCode=="8") {
@@ -249,6 +280,7 @@ var attributesArray=[
 			check();
 			row++;
 			focusVar=1;
+			document.getElementById(row+"letter"+focusVar).focus();
 		}
 
 		else if (row!=6) {
@@ -274,6 +306,13 @@ var attributesArray=[
 			if (letter.value!=randomSplit[randomSplitIndex]) {
 
 				letter.style.backgroundColor="rgb(200,0,0)";
+				letter.style.textShadow="0 0 0 black";
+
+			}
+
+			if (letter.value==randomSplit) {
+
+				letter.style.backgroundColor="rgb(255,255,0)";
 				letter.style.textShadow="0 0 0 black";
 
 			}
@@ -333,6 +372,8 @@ var attributesArray=[
 
 			usernameVar=usernameInput.value;
 			usernameStartDis.innerHTML="succes "+usernameVar;
+			usernameP.innerHTML=usernameVar;
+			usernameP.style.color="white";
 
 			usernameStartDis.className="block";
 			usernameInput.className="hide";
@@ -354,6 +395,18 @@ var attributesArray=[
 		usernameCreate.className="usernameInputHide";
 		usernameStartDis.className="hide";
 		functionName
+
+	}
+
+	function addStart() {
+
+		startBtn.className="block";
+		uitlegBtn.className="block";
+		if (usernameP.style.color=="black") {
+			usernameBtn.className="block";
+		}
+		usernameInput.className="usernameInputHide";
+		usernameCreate.className="usernameInputHide";
 
 	}
 
@@ -390,6 +443,8 @@ var attributesArray=[
 		window.addEventListener("keydown", locateLetter, false);
 		document.getElementById("1letter1").value=randomSplit[0];
 
+		timerPause=true;
+
 		var balkInterval=setInterval(
 
 			function() {
@@ -414,11 +469,21 @@ var attributesArray=[
 					secondsLeft.style.color='rgb(200,0,0)';
 				}
 
+				if (timeSeconds>10) {
+					timerBalk.style.backgroundColor='rgb(0,200,0)';
+					secondsLeft.style.color='rgb(0,200,0)';
+				}
+
 				if (timeSeconds<0) {
 					clearInterval(countdownInterval);
 					timerBalk.className="hide";
 					twoBtnModalStyle("block", gameOverText.textContent, quitCancel.textContent, quitConfirm.textContent);
 					clearInterval(balkInterval);
+				}
+
+				if (timerPause!=true) {
+					clearInterval(balkInterval);
+					clearInterval(countdownInterval);
 				}
 
 
