@@ -109,6 +109,18 @@
 		border-radius: 10px 40px 10px 40px;
 	}
 
+	#lingoBox input:hover {
+
+		cursor: default;
+
+	}
+
+	#shield:hover {
+
+		cursor: default;
+
+	}
+
 /*HOVERS*/
 
 

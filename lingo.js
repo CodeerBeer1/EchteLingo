@@ -9,6 +9,8 @@
 	var timerMarginTop=0;
 	var randomWord=words[Math.floor(Math.random()*words.length)];
 	var randomSplit=randomWord.split('');
+	var randomSplitCheck;
+	var good=0;
 	var focusVar=2;
 	var row=1;
 	var randomSplitIndex=0;
@@ -19,8 +21,8 @@
 
 
 //AUDIO
-	
-		var startAudio=document.getElementById("audio").autoplay;
+
+
 
 //AUDIO
 
@@ -96,6 +98,7 @@
 	var quitConfirm=document.createTextNode("Ja");
 	var quitCancel=document.createTextNode("Nee");
 	var loseText=document.createTextNode("Je hebt geen kansen meer. Het woord was "+randomWord+". Probeer nog eens!");
+	var wintextUsername=document.createTextNode("Gefeliciteerd je hebt gewonnen. Wil je opnieuw spelen?");
 
 	var option30sText=30;
 	var	option60sText=60;
@@ -300,36 +303,60 @@
 
 	function check() {
 
+		randomSplitCheck=randomSplit.slice(0);
+		var nogTeGaan=[];
 		for (i=1;i<6;i++) {
 
 			var letter=document.getElementById(row+"letter"+i);
 
-			if (randomWord.indexOf(letter.value)>-1&&letter.value!="") {
+			if (letter.value==randomSplit[i-1]) {
 
-				letter.style.backgroundColor="rgb(255,255,0)";
+				letter.style.backgroundColor="rgb(0,255,0)";
 				letter.style.textShadow="0 0 0 black";
+				randomSplitCheck[i-1]=false;
+				good++
 
 			}
 
-			else if (letter.value!=randomSplit[randomSplitIndex]) {
+			else {
+
+				nogTeGaan.push(letter);
+
+			}
+
+		}
+
+		for (a=0;a<nogTeGaan.length;a++) {
+
+			var letter=nogTeGaan[a];
+			var position=randomSplitCheck.indexOf(letter.value);
+
+			if (position>-1&&letter.value!="") {
+
+				letter.style.backgroundColor="rgb(255,200,0)";
+				letter.style.textShadow="0 0 0 black";
+				randomSplitCheck[position] = false;
+
+			}
+
+			else {
 
 				letter.style.backgroundColor="rgb(255,0,0)";
 				letter.style.textShadow="0 0 0 black";
 
 			}
 
-			if (letter.value==randomSplit[randomSplitIndex]) {
+		}
 
-				letter.style.backgroundColor="rgb(0,255,0)";
-				letter.style.textShadow="0 0 0 black";
+		if (good==5) {
 
-			}
-
-			randomSplitIndex++;
+			timerPause=false;
+			twoBtnModalStyle("block", wintextUsername.textContent, quitCancel.textContent, quitConfirm.textContent);
+			document.removeEventListener("onkeydown", locateLetter);
 
 		}
 
-		randomSplitIndex-=5;
+		good=0;
 
 	}
 
@@ -448,7 +475,7 @@
 		startTimerBtn.className="hide";
 
 		document.getElementById("1letter2").focus();
-		window.addEventListener("keydown", locateLetter, false);	
+		document.addEventListener("keydown", locateLetter);	
 		var letter=document.getElementById(row+"letter"+focusVar).value;
 		document.getElementById("1letter1").value=randomSplit[0];
 
