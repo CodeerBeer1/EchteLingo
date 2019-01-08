@@ -27,6 +27,14 @@ var attributesArray=[
 
 
 
+//AUDIO
+	
+		var startAudio=document.getElementById("startAudio");
+
+//AUDIO
+
+
+
 //ALL ELEMENTS
 
 	var lingoContainer=document.getElementById("lingo-container");
@@ -69,6 +77,14 @@ var attributesArray=[
 	}
 
 //ALL ELEMENTS
+
+
+
+//START EVENTLISTERNERS
+
+	
+
+//START EVENTLISTERNERS
 
 
 
@@ -305,14 +321,7 @@ var attributesArray=[
 
 			if (letter.value!=randomSplit[randomSplitIndex]) {
 
-				letter.style.backgroundColor="rgb(200,0,0)";
-				letter.style.textShadow="0 0 0 black";
-
-			}
-
-			if (letter.value==randomSplit) {
-
-				letter.style.backgroundColor="rgb(255,255,0)";
+				letter.style.backgroundColor="rgb(255,0,0)";
 				letter.style.textShadow="0 0 0 black";
 
 			}
@@ -490,6 +499,12 @@ var attributesArray=[
 			}
 		,
 				1000)
+
+	}
+
+	function startAudioFun() {
+
+		
 
 	}
 
