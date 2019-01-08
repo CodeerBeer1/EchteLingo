@@ -1,12 +1,3 @@
-//XTRA
-
-var attributesArray=[
-	"id",
-	"onclick",
-	"class"
-];
-
-//XTRA
 
 
 
@@ -29,7 +20,7 @@ var attributesArray=[
 
 //AUDIO
 	
-		var startAudio=document.getElementById("startAudio");
+		var startAudio=document.getElementById("audio").autoplay;
 
 //AUDIO
 
@@ -188,7 +179,7 @@ var attributesArray=[
 	btnOne.setAttribute("onclick", "twoBtnModalStyle('hide')");
 
 	btnTwo.setAttribute("id", "btnTwo");
-	btnTwo.setAttribute("onclick", "");
+	btnTwo.setAttribute("onclick", "reset()");
 
 //ATTRIBUTES
 
@@ -234,7 +225,9 @@ var attributesArray=[
 
 	function reset() {
 
-		timerHeight=100;
+		location.reload();
+
+		/*timerHeight=100;
 		timerMarginTop=0;
 		focusVar=2;
 		row=1;
@@ -262,7 +255,7 @@ var attributesArray=[
 		timerBalk.style.height="100%";
 
 		window.removeEventListener("keydown", locateLetter, false)
-		addStart();
+		addStart();*/
 
 	}
 
@@ -282,7 +275,7 @@ var attributesArray=[
 
 		else if (row==6) {
 			row--;
-			twoBtnModalStyle("block", loseText.textContent, quitConfirm.textContent, quitCancel.textContent);
+			twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
 			timerPause=false;
 		}
 
@@ -506,12 +499,6 @@ var attributesArray=[
 			}
 		,
 				1000)
-
-	}
-
-	function startAudioFun() {
-
-		
 
 	}
 
