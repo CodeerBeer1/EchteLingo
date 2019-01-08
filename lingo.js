@@ -271,12 +271,11 @@ var attributesArray=[
 		console.log('row'+row);
 		console.log('letter'+focusVar)
 
-		if (focusVar>5) {
+		if (focusVar>4) {
 		 	focusVar=5;
-		 	document.getElementById(row+"letter"+focusVar).focus();
 		}
 
-		else if (focusVar<1) {
+		 if (focusVar<1) {
 			focusVar++;
 			document.getElementById(row+"letter"+focusVar).focus();
 		}
@@ -312,16 +311,23 @@ var attributesArray=[
 
 			var letter=document.getElementById(row+"letter"+i);
 
-			if (letter.value==randomSplit[randomSplitIndex]) {
+			if (randomWord.indexOf(letter.value)>-1&&letter.value!="") {
 
-				letter.style.backgroundColor="rgb(0,255,0)";
+				letter.style.backgroundColor="rgb(255,255,0)";
 				letter.style.textShadow="0 0 0 black";
 
 			}
 
-			if (letter.value!=randomSplit[randomSplitIndex]) {
+			else if (letter.value!=randomSplit[randomSplitIndex]) {
 
 				letter.style.backgroundColor="rgb(255,0,0)";
+				letter.style.textShadow="0 0 0 black";
+
+			}
+
+			if (letter.value==randomSplit[randomSplitIndex]) {
+
+				letter.style.backgroundColor="rgb(0,255,0)";
 				letter.style.textShadow="0 0 0 black";
 
 			}
@@ -449,7 +455,8 @@ var attributesArray=[
 		startTimerBtn.className="hide";
 
 		document.getElementById("1letter2").focus();
-		window.addEventListener("keydown", locateLetter, false);
+		window.addEventListener("keydown", locateLetter, false);	
+		var letter=document.getElementById(row+"letter"+focusVar).value;
 		document.getElementById("1letter1").value=randomSplit[0];
 
 		timerPause=true;
