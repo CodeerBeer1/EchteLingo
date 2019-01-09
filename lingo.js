@@ -34,6 +34,7 @@
 	var startBtn=document.getElementById("startBtn");
 	var uitlegBtn=document.getElementById("uitlegBtn");
 	var usernameBtn=document.getElementById("usernameBtn");
+	var audio=document.getElementById("audio");
 
 	var oneBtnModal=document.createElement("div");
 	var oneBtnModalText=document.createElement("p");
@@ -279,6 +280,8 @@
 		else if (row==6) {
 			row--;
 			twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
+			document.removeEventListener("keydown", locateLetter);
+			audio.src="audio/lost.mp3";
 			timerPause=false;
 		}
 
@@ -352,7 +355,8 @@
 
 			timerPause=false;
 			twoBtnModalStyle("block", wintextUsername.textContent, quitCancel.textContent, quitConfirm.textContent);
-			document.removeEventListener("onkeydown", locateLetter);
+			audio.src="audio/win.mp3";
+			document.removeEventListener("keydown", locateLetter);
 
 		}
 
@@ -471,6 +475,7 @@
 
 	function startTimer() {
 
+		audio.src="audio/suspense.mp3";
 		shield.className="hide";
 		startTimerBtn.className="hide";
 
@@ -515,11 +520,14 @@
 					timerBalk.className="hide";
 					twoBtnModalStyle("block", gameOverText.textContent, quitCancel.textContent, quitConfirm.textContent);
 					clearInterval(balkInterval);
+					audio.src="audio/lost.mp3";
+					document.removeEventListener("keydown", locateLetter);
 				}
 
 				if (timerPause!=true) {
 					clearInterval(balkInterval);
 					clearInterval(countdownInterval);
+					
 				}
 
 
@@ -532,7 +540,8 @@
 	function startLingo() {
 		
 		console.log(timeSeconds+" second game started");
-		
+		audio.src="";
+
 		chooseTime.className="hide";
 		option30s.className="hide";
 		option60s.className="hide";
