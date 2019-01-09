@@ -311,7 +311,7 @@
 
 	#oneBtnModalText {
 		margin: 100px auto 0px auto;
-		width: 300px;
+		width: 350px;
 		background-color: white;
 		border-radius: 40px 10px 40px 10px;
 		color: black;
@@ -370,7 +370,7 @@
 
 	#twoBtnModalText {
 		margin: 100px auto 0px auto;
-		width: 300px;
+		width: 350px;
 		padding: 20px;
 		font-size: 17px;
 		border-radius: 40px 10px 40px 10px;
@@ -493,6 +493,29 @@
 		border-width: 5px;
 		border-radius: 40px 10px 40px 10px;
 		border-color: rgb(0,0,100);
+	}
+
+	#volume {
+		grid-area: 2/5;
+		transform: rotate(270deg);
+		margin: auto;
+		outline: none;
+		-webkit-appearance: none;
+  		width: 100%;
+ 		height: 10px;
+  		background: rgb(0,0,100);
+ 		outline: none;
+ 		-webkit-transition: .2s;
+ 		transition: opacity .2s;
+	}
+
+	.slider:-webkit-slider-thumb {
+  	-webkit-appearance: none;
+  	appearance: none;
+  	width: 25px;
+ 	 height: 25px;
+ 	 background: #4CAF50;
+ 	 cursor: pointer;
 	}
 
 /*ELSE*/

@@ -15,6 +15,7 @@
 	var row=1;
 	var randomSplitIndex=0;
 	var timerPause=true;
+	var volumeValue=100;
 
 //IMPORTANT VARS
 
@@ -35,6 +36,7 @@
 	var uitlegBtn=document.getElementById("uitlegBtn");
 	var usernameBtn=document.getElementById("usernameBtn");
 	var audio=document.getElementById("audio");
+	var volumeslider=document.getElementById("volume");
 
 	var oneBtnModal=document.createElement("div");
 	var oneBtnModalText=document.createElement("p");
@@ -76,7 +78,7 @@
 
 //START EVENTLISTERNERS
 
-	
+	volumeslider.addEventListener("change", volumeChange);
 
 //START EVENTLISTERNERS
 
@@ -185,6 +187,9 @@
 	btnTwo.setAttribute("id", "btnTwo");
 	btnTwo.setAttribute("onclick", "reset()");
 
+	volumeslider.value=volumeValue
+	audio.volume=volumeValue;
+
 //ATTRIBUTES
 
 
@@ -277,7 +282,7 @@
 			document.getElementById(row+"letter"+focusVar).focus();
 		}
 
-		else if (row==6) {
+		else if (row>5) {
 			row--;
 			twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
 			document.removeEventListener("keydown", locateLetter);
@@ -358,6 +363,8 @@
 			audio.src="audio/win.mp3";
 			document.removeEventListener("keydown", locateLetter);
 
+			return true;
+
 		}
 
 		good=0;
@@ -397,6 +404,12 @@
 
 		}
 		
+	}
+
+	function volumeChange() {
+
+		
+
 	}
 
 	function createUsername() {
