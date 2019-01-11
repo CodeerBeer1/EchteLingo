@@ -11,21 +11,13 @@
 	var randomSplit=randomWord.split('');
 	var randomSplitCheck;
 	var good=0;
-	var focusVar=2;
+	var focusVar=1;
 	var row=1;
 	var randomSplitIndex=0;
 	var timerPause=true;
-	var volumeValue=100;
+	var chance=1;
 
 //IMPORTANT VARS
-
-
-
-//AUDIO
-
-
-
-//AUDIO
 
 
 
@@ -37,6 +29,7 @@
 	var usernameBtn=document.getElementById("usernameBtn");
 	var audio=document.getElementById("audio");
 	var volumeslider=document.getElementById("volume");
+	var chances=document.getElementById("chances");
 
 	var oneBtnModal=document.createElement("div");
 	var oneBtnModalText=document.createElement("p");
@@ -101,7 +94,8 @@
 	var quitConfirm=document.createTextNode("Ja");
 	var quitCancel=document.createTextNode("Nee");
 	var loseText=document.createTextNode("Je hebt geen kansen meer. Het woord was "+randomWord+". Probeer nog eens!");
-	var wintextUsername=document.createTextNode("Gefeliciteerd je hebt gewonnen. Wil je opnieuw spelen?");
+	var wintextUsername=document.createTextNode("Gefeliciteerd je hebt gewonnen met "+chance+" kansen. Wil je opnieuw spelen?");
+	var winonchance=document.createTextNode("Whoa je hebt de woord in een keer geraden! Doe dat is nog een keer.");
 
 	var option30sText=30;
 	var	option60sText=60;
@@ -185,10 +179,7 @@
 	btnOne.setAttribute("onclick", "twoBtnModalStyle('hide')");
 
 	btnTwo.setAttribute("id", "btnTwo");
-	btnTwo.setAttribute("onclick", "reset()");
-
-	volumeslider.value=volumeValue
-	audio.volume=volumeValue;
+	btnTwo.setAttribute("onclick", "location.reload()");
 
 //ATTRIBUTES
 
@@ -230,85 +221,103 @@
 
 
 
+//SLIDER
+
+
+
+//SLIDER
+
+
+
 //FUNCTIONS
-
-	function reset() {
-
-		location.reload();
-
-		/*timerHeight=100;
-		timerMarginTop=0;
-		focusVar=2;
-		row=1;
-		timerPause=false
-		randomWord=words[Math.floor(Math.random()*words.length)];
-		randomSplit=randomWord.split("");
-
-		loseText=document.createTextNode("Je hebt geen kansen meer. Het woord was "+randomWord+". Probeer nog eens!");
-		gameOverText=document.createTextNode("Helaas, je tijd is om. Het woord was "+randomWord+". Wil je opnieuw proberen?")
-
-		twoBtnModalStyle("hide");
-		lingoBox.className="hide";
-		secondsLeft.className="hide";
-		usernameDisplay.className="hide";
-		timerBalk.style.backgroundColor="rgb(0,200,0)";
-		secondsLeft.style.color="rgb(0,200,0)";
-		usernameStartDis.className="hide";
-		quitBtn.className="hide";
-		shield.className="hide";
-		timer.className="hide";
-		startTimerBtn.className="hide";
-		secondsLeft.style.color="rgb(0,200,0)";
-		timerBalk.style.backgroundColor="rgb(0,200,0)";
-		timerBalk.style.marginTop="0%";
-		timerBalk.style.height="100%";
-
-		window.removeEventListener("keydown", locateLetter, false)
-		addStart();*/
-
-	}
 
 	function locateLetter(evt) {
 
 		console.log('row'+row);
-		console.log('letter'+focusVar)
+		console.log('letter'+focusVar);
 
-		if (focusVar>4) {
-		 	focusVar=5;
-		}
+		// if (focusVar>4) {
+		//  	focusVar=5;
+		// }
 
-		 if (focusVar<1) {
-			focusVar++;
-			document.getElementById(row+"letter"+focusVar).focus();
-		}
+		//  if (focusVar<1) {
+		// 	focusVar++;
+		// 	document.getElementById(row+"letter"+focusVar).focus();
+		// }
 
-		else if (row>5) {
-			row--;
-			twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
-			document.removeEventListener("keydown", locateLetter);
-			audio.src="audio/lost.mp3";
-			timerPause=false;
-		}
+		// else if (row>5) {
+		// 	row--;
+		// 	twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
+		// 	document.removeEventListener("keydown", locateLetter);
+		// 	audio.src="audio/lost.mp3";
+		// 	timerPause=false;
+		// }
 
-		else if (evt.keyCode=="8") {
+		// else if (evt.keyCode=="8") {
+		// 	if (focusVar<=5) {
+		// 		document.getElementById(row+"letter"+focusVar).focus();
+		// 		focusVar--;
+
+		// 	}
+			
+		// }
+
+		// else if (evt.keyCode=="13") {
+		// 	check();
+		// 	chances.className="block";
+		// 	chances.innerHTML=chance++;
+		// 	row++;
+		// 	focusVar=1;
+		// 	document.getElementById(row+"letter"+focusVar).focus();
+		// }
+
+		// else if (row!=6) {
+		// 	document.getElementById(row+"letter"+focusVar).focus();
+		// 	focusVar++;
+		// }
+
+
+
+		if (evt.keyCode==8) {
+			if(focusVar<=6){
+			
 			document.getElementById(row+"letter"+focusVar).focus();
 			focusVar--;
+			
+			}
 		}
-
+		
 		else if (evt.keyCode=="13") {
-			check();
-			row++;
-			focusVar=1;
-			document.getElementById(row+"letter"+focusVar).focus();
-		}
 
-		else if (row!=6) {
-			document.getElementById(row+"letter"+focusVar).focus();
-			focusVar++;
+			if (chance==5) {
+			
+				twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
+				document.removeEventListener("keydown", locateLetter);
+				audio.src="audio/lost.mp3";
+				timerPause=false;
+
+			}
+				check();
+				chances.className="block";
+				chances.innerHTML=chance++;
+				row++;
+				focusVar=0;
+				document.getElementById(row+"letter"+focusVar).focus();
+				
+
+			}
+			
+		 else {
+			if(focusVar<=4) {
+				focusVar++;
+				document.getElementById(row+"letter"+focusVar).focus();
+			}
 		}
 
 	}
 
+
+	
 	function check() {
 
 		randomSplitCheck=randomSplit.slice(0);
@@ -358,12 +367,23 @@
 
 		if (good==5) {
 
+			if (chance==1) {
+
 			timerPause=false;
-			twoBtnModalStyle("block", wintextUsername.textContent, quitCancel.textContent, quitConfirm.textContent);
+			twoBtnModalStyle("block", winonchance.textContent, quitCancel.textContent, quitConfirm.textContent);
 			audio.src="audio/win.mp3";
 			document.removeEventListener("keydown", locateLetter);
 
-			return true;
+			}
+
+			else {
+
+			timerPause=false;
+			twoBtnModalStyle("block", wintextUsername.textContent, quitCancel.textContent, quitConfirm.textContent);
+			audio.src="audio/sax.mp3";
+			document.removeEventListener("keydown", locateLetter);
+
+		}
 
 		}
 
@@ -407,8 +427,9 @@
 	}
 
 	function volumeChange() {
-
-		
+		alert(volumeslider.value);
+		console.log(volumeslider.value)
+		audio.setVolume(0);
 
 	}
 

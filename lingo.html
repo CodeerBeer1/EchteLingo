@@ -10,31 +10,19 @@
 
 </head>
 <body>
-
-<!--STARTPAGE-->
-
-<iframe src="audio/intro.mp3" allow="autoplay" style="display: none" id="audio"></iframe>
+	
+<iframe src="audio/intro.mp3" controls style="display: none" id="audio"></iframe>
 
 <div id="lingo-container" class="bungee">
 
 	<button onclick="removeStart(chooseTimeFun())" id="startBtn" class="block">Lingo</button>
 	<button onclick="oneBtnModalStyle('block', uitlegText.textContent, okText.textContent)" id="uitlegBtn" class="block">Uitleg</button>
 	<button onclick="usernameDisplay()" id="usernameBtn" class="block">Maak een Username</button>
-	<input type="range" min="0" max="100" id="volume">
+	<input type="range" min="0" value="100" max="100" id="volume">
+	<p class="hide" id="chances"></p>
 
 </div>
-
-<!--STARTPAGE-->
-
-
-
-<!--SCRIPTLINKS-->
-
-	<script src="lingo.js"></script>
-
-<!--SCRIPTLINKS-->
-
-
+<script src="lingo.js"></script>
 
 </body>
 </html>
