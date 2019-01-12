@@ -13,7 +13,6 @@
 	var good=0;
 	var focusVar=1;
 	var row=1;
-	var randomSplitIndex=0;
 	var timerPause=true;
 	var chance=1;
 
@@ -27,6 +26,7 @@
 	var startBtn=document.getElementById("startBtn");
 	var uitlegBtn=document.getElementById("uitlegBtn");
 	var usernameBtn=document.getElementById("usernameBtn");
+	var info=document.getElementById("info");
 	var audio=document.getElementById("audio");
 	var volumeslider=document.getElementById("volume");
 	var chances=document.getElementById("chances");
@@ -54,6 +54,9 @@
 	var twoBtnDiv=document.createElement("div");
 	var btnOne=document.createElement("button");
 	var btnTwo=document.createElement("button");
+	var infoModal=document.createElement("div");
+	var infoXpText=document.createElement("p");
+	var closeInfo=document.createElement("button");
 
 	for (a=1;a<6;a++) {
 		for (i=1;i<6;i++) {
@@ -66,14 +69,6 @@
 	}
 
 //ALL ELEMENTS
-
-
-
-//START EVENTLISTERNERS
-
-	volumeslider.addEventListener("change", volumeChange);
-
-//START EVENTLISTERNERS
 
 
 
@@ -96,12 +91,21 @@
 	var loseText=document.createTextNode("Je hebt geen kansen meer. Het woord was "+randomWord+". Probeer nog eens!");
 	var wintextUsername=document.createTextNode("Gefeliciteerd je hebt gewonnen met "+chance+" kansen. Wil je opnieuw spelen?");
 	var winonchance=document.createTextNode("Whoa je hebt de woord in een keer geraden! Doe dat is nog een keer.");
+	var bestXperience=document.createTextNode("Voor de beste ervaring zou ik je aanraden om in te zoomen totdat de lingo jouw scherm vult, het is klein gemaakt omdat de lingo dan in alle schermen past. Ik zou ook aanraden om in fulscreen te spelen (druk op F11), dan staan de URL en al je tabbladen niet in de weg, en deze Lingo is geoptimaliseerd voor Google Chrome web browser, dus werkt het niet goed bij andere browsers.");
 
 	var option30sText=30;
 	var	option60sText=60;
 	var option90sText=90;
 
 //TEXTNODES
+
+
+
+//EVENTLISTERNERS
+
+volumeslider.addEventListener("change", volumeChange);
+
+//EVENTLISTERNERS
 
 
 
@@ -181,6 +185,14 @@
 	btnTwo.setAttribute("id", "btnTwo");
 	btnTwo.setAttribute("onclick", "location.reload()");
 
+	infoModal.setAttribute("id", "infoModal");
+	infoModal.setAttribute("class", "hide");
+
+	infoXpText.setAttribute("id", "infoXpText");
+
+	closeInfo.setAttribute("id", "closeInfo");
+	closeInfo.setAttribute("onclick", "infoShow('hide')")
+
 //ATTRIBUTES
 
 
@@ -203,6 +215,7 @@
 	lingoContainer.appendChild(usernameP);
 	lingoContainer.appendChild(quitBtn);
 	lingoContainer.appendChild(twoBtnModal);
+	lingoContainer.appendChild(infoModal);
 
 	oneBtnModal.appendChild(oneBtnModalText);
 	oneBtnModal.appendChild(backB);
@@ -216,16 +229,10 @@
 	twoBtnDiv.appendChild(btnOne);
 	twoBtnModal.appendChild(twoBtnDiv);
 	twoBtnDiv.appendChild(btnTwo);
+	infoModal.appendChild(infoXpText);
+	infoModal.appendChild(closeInfo);
 
 //APPENDING
-
-
-
-//SLIDER
-
-
-
-//SLIDER
 
 
 
@@ -233,58 +240,13 @@
 
 	function locateLetter(evt) {
 
-		console.log('row'+row);
-		console.log('letter'+focusVar);
-
-		// if (focusVar>4) {
-		//  	focusVar=5;
-		// }
-
-		//  if (focusVar<1) {
-		// 	focusVar++;
-		// 	document.getElementById(row+"letter"+focusVar).focus();
-		// }
-
-		// else if (row>5) {
-		// 	row--;
-		// 	twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
-		// 	document.removeEventListener("keydown", locateLetter);
-		// 	audio.src="audio/lost.mp3";
-		// 	timerPause=false;
-		// }
-
-		// else if (evt.keyCode=="8") {
-		// 	if (focusVar<=5) {
-		// 		document.getElementById(row+"letter"+focusVar).focus();
-		// 		focusVar--;
-
-		// 	}
-			
-		// }
-
-		// else if (evt.keyCode=="13") {
-		// 	check();
-		// 	chances.className="block";
-		// 	chances.innerHTML=chance++;
-		// 	row++;
-		// 	focusVar=1;
-		// 	document.getElementById(row+"letter"+focusVar).focus();
-		// }
-
-		// else if (row!=6) {
-		// 	document.getElementById(row+"letter"+focusVar).focus();
-		// 	focusVar++;
-		// }
-
-
-
 		if (evt.keyCode==8) {
+
 			if(focusVar<=6){
-			
-			document.getElementById(row+"letter"+focusVar).focus();
-			focusVar--;
-			
+				document.getElementById(row+"letter"+focusVar).focus();
+				focusVar--;
 			}
+
 		}
 		
 		else if (evt.keyCode=="13") {
@@ -297,21 +259,23 @@
 				timerPause=false;
 
 			}
+
 				check();
 				chances.className="block";
 				chances.innerHTML=chance++;
 				row++;
 				focusVar=0;
 				document.getElementById(row+"letter"+focusVar).focus();
-				
 
 			}
 			
 		 else {
+
 			if(focusVar<=4) {
 				focusVar++;
 				document.getElementById(row+"letter"+focusVar).focus();
 			}
+
 		}
 
 	}
@@ -373,6 +337,7 @@
 			twoBtnModalStyle("block", winonchance.textContent, quitCancel.textContent, quitConfirm.textContent);
 			audio.src="audio/win.mp3";
 			document.removeEventListener("keydown", locateLetter);
+			chances.style.color="gold";
 
 			}
 
@@ -382,6 +347,7 @@
 			twoBtnModalStyle("block", wintextUsername.textContent, quitCancel.textContent, quitConfirm.textContent);
 			audio.src="audio/sax.mp3";
 			document.removeEventListener("keydown", locateLetter);
+			chances.style.color="gold";
 
 		}
 
@@ -459,6 +425,16 @@
 
 	}
 
+	function infoShow(classname, text, btn) {
+
+		infoModal.className=classname;
+		infoXpText.innerHTML=text;
+		closeInfo.innerHTML=btn;
+
+	}
+
+	
+
 	function removeStart(functionName) {
 		
 		startBtn.className="hide";
@@ -467,19 +443,9 @@
 		usernameInput.className="usernameInputHide";
 		usernameCreate.className="usernameInputHide";
 		usernameStartDis.className="hide";
+		info.className="hide";
+
 		functionName
-
-	}
-
-	function addStart() {
-
-		startBtn.className="block";
-		uitlegBtn.className="block";
-		if (usernameP.style.color=="black") {
-			usernameBtn.className="block";
-		}
-		usernameInput.className="usernameInputHide";
-		usernameCreate.className="usernameInputHide";
 
 	}
 
