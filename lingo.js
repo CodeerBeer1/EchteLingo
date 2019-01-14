@@ -89,7 +89,7 @@
 	var quitConfirm=document.createTextNode("Ja");
 	var quitCancel=document.createTextNode("Nee");
 	var loseText=document.createTextNode("Je hebt geen kansen meer. Het woord was "+randomWord+". Probeer nog eens!");
-	var wintextUsername=document.createTextNode("Gefeliciteerd je hebt gewonnen met "+chance+" kansen. Wil je opnieuw spelen?");
+	var wintextUsername=document.createTextNode("Gefeliciteerd je hebt gewonnen. Wil je opnieuw spelen?");
 	var winonchance=document.createTextNode("Whoa je hebt de woord in een keer geraden! Doe dat is nog een keer.");
 	var bestXperience=document.createTextNode("Voor de beste ervaring zou ik je aanraden om in te zoomen totdat de lingo jouw scherm vult, het is klein gemaakt omdat de lingo dan in alle schermen past. Ik zou ook aanraden om in fulscreen te spelen (druk op F11), dan staan de URL en al je tabbladen niet in de weg, en deze Lingo is geoptimaliseerd voor Google Chrome web browser, dus werkt het niet goed bij andere browsers.");
 
@@ -337,7 +337,6 @@ volumeslider.addEventListener("change", volumeChange);
 			twoBtnModalStyle("block", winonchance.textContent, quitCancel.textContent, quitConfirm.textContent);
 			audio.src="audio/win.mp3";
 			document.removeEventListener("keydown", locateLetter);
-			chances.style.color="gold";
 
 			}
 
@@ -348,6 +347,7 @@ volumeslider.addEventListener("change", volumeChange);
 			audio.src="audio/sax.mp3";
 			document.removeEventListener("keydown", locateLetter);
 			chances.style.color="gold";
+			chances.style.zIndex="3"
 
 		}
 
