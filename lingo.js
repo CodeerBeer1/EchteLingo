@@ -272,7 +272,6 @@ volumeslider.addEventListener("change", volumeChange);
 
 		if (letters.indexOf(evt.key)==-1&&evt.keyCode!="8"&&evt.keyCode!="13") {
 
-			evt.preventDefault();
 			focusVar--;
 
 		}
@@ -294,13 +293,14 @@ volumeslider.addEventListener("change", volumeChange);
 
 		else if (evt.keyCode=="13") {
 
-			if (chance>=5) {
+			if (chance==5) {
 			
+				timerPause=false;
+				timeSeconds++;
 				twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
 				document.getElementById(row+"letter"+focusVar).blur();
 				document.removeEventListener("keydown", locateLetter);
 				audio.src="audio/lost.mp3";
-				timerPause=false;
 
 			}
 
@@ -339,7 +339,7 @@ volumeslider.addEventListener("change", volumeChange);
 				letter.style.backgroundColor="rgb(0,255,0)";
 				letter.style.textShadow="0 0 0 black";
 				randomSplitCheck[i-1]=false;
-				good++
+				good++;
 
 			}
 
@@ -360,7 +360,7 @@ volumeslider.addEventListener("change", volumeChange);
 
 				letter.style.backgroundColor="rgb(255,200,0)";
 				letter.style.textShadow="0 0 0 black";
-				randomSplitCheck[position] = false;
+				randomSplitCheck[position]=false;
 
 			}
 
@@ -395,9 +395,9 @@ volumeslider.addEventListener("change", volumeChange);
 				document.getElementById(row+"letter"+focusVar).blur();
 				document.removeEventListener("keydown", locateLetter);
 				chances.style.color="gold";
-				chances.style.zIndex="3"
+				chances.style.zIndex="3";
 
-		}
+			}
 
 		}
 
