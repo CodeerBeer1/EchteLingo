@@ -14,6 +14,34 @@
 	var focusVar=1;
 	var row=1;
 	var timerPause=true;
+	var letters=[
+	 "a",
+	 "b",
+	 "c",
+	 "d",
+	 "e",
+	 "f",
+	 "g",
+	 "h",
+	 "i",
+	 "j",
+	 "k",
+	 "l",
+	 "m",
+	 "n",
+	 "o",
+	 "p",
+	 "q",
+	 "r",
+	 "s",
+	 "t",
+	 "u",
+	 "v",
+	 "w",
+	 "x",
+	 "y",
+	 "z"
+];
 	var chance=1;
 
 //IMPORTANT VARS
@@ -240,20 +268,36 @@ volumeslider.addEventListener("change", volumeChange);
 
 	function locateLetter(evt) {
 
-		if (evt.keyCode==8) {
+		var letter=document.getElementById(row+"letter"+focusVar);
 
-			if(focusVar<=6){
+		if (letters.indexOf(evt.key)==-1&&evt.keyCode!="8"&&evt.keyCode!="13") {
+
+			evt.preventDefault();
+			focusVar--;
+
+		}
+
+		if (evt.keyCode=="8") {
+
+			if (evt.keyCode=="8"&&focusVar==0) {
+
+				evt.preventDefault();
+
+			}
+
+			if (focusVar<=6){
 				document.getElementById(row+"letter"+focusVar).focus();
 				focusVar--;
 			}
 
 		}
-		
+
 		else if (evt.keyCode=="13") {
 
-			if (chance==5) {
+			if (chance>=5) {
 			
 				twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
+				document.getElementById(row+"letter"+focusVar).blur();
 				document.removeEventListener("keydown", locateLetter);
 				audio.src="audio/lost.mp3";
 				timerPause=false;
@@ -332,22 +376,26 @@ volumeslider.addEventListener("change", volumeChange);
 		if (good==5) {
 
 			if (chance==1) {
-
-			timerPause=false;
-			twoBtnModalStyle("block", winonchance.textContent, quitCancel.textContent, quitConfirm.textContent);
-			audio.src="audio/win.mp3";
-			document.removeEventListener("keydown", locateLetter);
+				
+				timerPause=false;
+				timeSeconds++;
+				audio.src="audio/win.mp3";
+				twoBtnModalStyle("block", winonchance.textContent, quitCancel.textContent, quitConfirm.textContent);
+				document.removeEventListener("keydown", locateLetter);
+				document.getElementById(row+"letter"+focusVar).blur();
 
 			}
 
 			else {
 
-			timerPause=false;
-			twoBtnModalStyle("block", wintextUsername.textContent, quitCancel.textContent, quitConfirm.textContent);
-			audio.src="audio/sax.mp3";
-			document.removeEventListener("keydown", locateLetter);
-			chances.style.color="gold";
-			chances.style.zIndex="3"
+				timerPause=false;
+				timeSeconds++;
+				twoBtnModalStyle("block", wintextUsername.textContent, quitCancel.textContent, quitConfirm.textContent);
+				audio.src="audio/sax.mp3";
+				document.getElementById(row+"letter"+focusVar).blur();
+				document.removeEventListener("keydown", locateLetter);
+				chances.style.color="gold";
+				chances.style.zIndex="3"
 
 		}
 
@@ -510,12 +558,8 @@ volumeslider.addEventListener("change", volumeChange);
 					secondsLeft.style.color='rgb(200,0,0)';
 				}
 
-				if (timeSeconds>10) {
-					timerBalk.style.backgroundColor='rgb(0,200,0)';
-					secondsLeft.style.color='rgb(0,200,0)';
-				}
-
 				if (timeSeconds<0) {
+
 					clearInterval(countdownInterval);
 					timerBalk.className="hide";
 					twoBtnModalStyle("block", gameOverText.textContent, quitCancel.textContent, quitConfirm.textContent);
