@@ -383,6 +383,8 @@ volumeslider.addEventListener("change", volumeChange);
 				twoBtnModalStyle("block", winonchance.textContent, quitCancel.textContent, quitConfirm.textContent);
 				document.removeEventListener("keydown", locateLetter);
 				document.getElementById(row+"letter"+focusVar).blur();
+				chances.style.color="gold";
+				chances.style.zIndex="3";
 
 			}
 
@@ -441,9 +443,8 @@ volumeslider.addEventListener("change", volumeChange);
 	}
 
 	function volumeChange() {
-		alert(volumeslider.value);
-		console.log(volumeslider.value)
-		audio.setVolume(0);
+		
+		audio.volume=volumeslider.value/100;
 
 	}
 

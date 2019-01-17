@@ -7,11 +7,11 @@
 	<meta charset="utf-8">
 	<script src="lingo-nl.js"></script>
 	<link rel="shortcut icon" type="image/png" href="img/lingoIcon.png">
+	<audio src="audio/intro.mp3" autoplay id="audio"></audio>
 
 </head>
 <body>
-	
-<iframe src="audio/intro.mp3" controls style="display: none" id="audio"></iframe>
+
 
 <div id="lingo-container" class="bungee">
 
@@ -19,6 +19,7 @@
 	<button onclick="oneBtnModalStyle('block', uitlegText.textContent, okText.textContent)" id="uitlegBtn" class="block">Uitleg</button>
 	<button onclick="usernameDisplay()" id="usernameBtn" class="block">Maak een Username</button>
 	<input type="range" min="0" value="100" max="100" id="volume">
+	<img src="img/speaker.svg" id="speaker">
 	<button onclick="infoShow('block', bestXperience.textContent, backText.textContent)" class="block" id="info">?</button>
 	<p class="hide" id="chances"></p>
 
