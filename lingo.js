@@ -297,10 +297,10 @@ volumeslider.addEventListener("change", volumeChange);
 			
 				timerPause=false;
 				timeSeconds++;
-				twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
-				document.getElementById(row+"letter"+focusVar).blur();
-				document.removeEventListener("keydown", locateLetter);
 				audio.src="audio/lost.mp3";
+				twoBtnModalStyle("block", loseText.textContent, quitCancel.textContent, quitConfirm.textContent);
+				document.removeEventListener("keydown", locateLetter);
+				document.getElementById(row+"letter"+focusVar).blur();
 
 			}
 
